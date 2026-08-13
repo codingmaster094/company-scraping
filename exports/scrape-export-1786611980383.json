@@ -1,0 +1,125 @@
+[
+  {
+    "companyName": "10com Web Development",
+    "companyUrl": "https://www.10comwebdevelopment.com/",
+    "rating": "",
+    "address": "10com Web Development\n4.8(456) · Website designer\n20+ years in business · Chicago, IL, United States\nOpen 24 hours · +1 312-321-7496\nOn-site services·\nOnline appointments",
+    "companyEmail": "info@10comwebdevelopment.com",
+    "companyPhone": "1786586767761",
+    "service": "At 10com, we provide custom web design, SEO, and digital marketing strategies tailored to your business. Partner with our team to maximize your online growth.",
+    "detectedServices": [
+      "Social Media Management",
+      "Web Development",
+      "SEO",
+      "Website Design",
+      "Logo Design",
+      "Ecommerce Development",
+      "Graphic Design",
+      "Branding & Identity",
+      "Content Writing / Copywriting",
+      "Blog Writing",
+      "Digital Marketing",
+      "Press Release & Distribution",
+      "Video Production & Animation",
+      "Backlink Building",
+      "Tagline & Slogan Writing",
+      "Google Ads / PPC",
+      "Wix Web Design"
+    ],
+    "technologies": [
+      "WP Rocket",
+      "Wix"
+    ]
+  },
+  {
+    "companyName": "Chicago Website Design SEO Company",
+    "companyUrl": "https://chicagowebsitedesignseocompany.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp&utm_content=website_button",
+    "rating": "",
+    "address": "Chicago Website Design SEO Company\n4.9(71) · Website designer\n10+ years in business · Chicago, IL, United States\nClosed · Opens 5 am · +1 312-448-8310\nOn-site services·\nOnline appointments",
+    "companyEmail": "info@chicagowebsitedesignseocompany.com",
+    "companyPhone": "+13124488310",
+    "service": "Rank #1 on Google & grow your business with Chicago’s top-rated SEO & website design team. 70+ 5-Star reviews. No long-term contracts. Get a free audit today!",
+    "detectedServices": [
+      "Website Design",
+      "Web Development",
+      "Ecommerce Development",
+      "SEO",
+      "Google Ads / PPC",
+      "Digital Marketing"
+    ],
+    "technologies": [
+      "WordPress",
+      "jQuery",
+      "PHP 8.2.33"
+    ]
+  },
+  {
+    "companyName": "Flamingo Agency",
+    "companyUrl": "https://www.flamingoagency.com/?utm_source=gmb&utm_medium=organic",
+    "rating": "",
+    "address": "Flamingo Agency\n5.0(88) · Website designer\n10+ years in business · Chicago, IL, United States\nOpen 24 hours · +1 312-967-7044\nOn-site services·\nOnline appointments",
+    "companyEmail": "info@flamingoagency.com",
+    "companyPhone": "1000300",
+    "service": "Flamingo Agency is a web design agency creating custom WordPress websites for small businesses. View our portfolio and 150+ five-star reviews.",
+    "detectedServices": [
+      "Website Design",
+      "Website Maintenance",
+      "Digital Marketing",
+      "SEO",
+      "WordPress Development",
+      "Ecommerce Development",
+      "Web Development"
+    ],
+    "technologies": [
+      "WordPress",
+      "Elementor",
+      "WP Rocket",
+      "jQuery",
+      "PHP",
+      "WooCommerce"
+    ]
+  },
+  {
+    "companyName": "Brand Vision Marketing - Web Design & Branding",
+    "companyUrl": "https://www.brandvm.com/chicago?utm_source=gmb&utm_medium=organic&utm_campaign=chicago_map_pack",
+    "rating": "",
+    "address": "Brand Vision Marketing - Web Design & Branding\n5.0(41) · Website designer\n7+ years in business · Chicago, IL, United States\nOpen 24 hours · +1 312-741-0303\nOn-site services·\nOnline appointments",
+    "companyEmail": "Info@brandvm.com",
+    "companyPhone": "+18888322917",
+    "service": "Chicago branding agency. Brand Vision delivers branding services, brand identity design, and high-performance web design for businesses across Chicago and the United States. Request a proposal.",
+    "detectedServices": [
+      "Website Design",
+      "SEO",
+      "UI/UX Design",
+      "Content Writing / Copywriting",
+      "Web Development",
+      "Ecommerce Development",
+      "Graphic Design"
+    ],
+    "technologies": [
+      "Webflow",
+      "WordPress",
+      "Shopify"
+    ]
+  },
+  {
+    "companyName": "1Brand Design",
+    "companyUrl": "https://1brand.design/",
+    "rating": "",
+    "address": "1Brand Design\n5.0(36) · Website designer\n15+ years in business\nClosed · Opens 8 am · +1 773-680-4999\nOnline appointments",
+    "companyEmail": "info@1brand.design",
+    "companyPhone": "7736804999",
+    "service": "Chicago web design, SEO & branding for small businesses. 15+ years of experience, fast turnaround, and a free same-day consultation.",
+    "detectedServices": [
+      "Website Design",
+      "SEO",
+      "Graphic Design",
+      "Social Media Management"
+    ],
+    "technologies": [
+      "WordPress",
+      "jQuery",
+      "PHP"
+    ]
+  }
+]

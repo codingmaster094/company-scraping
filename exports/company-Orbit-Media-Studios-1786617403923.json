@@ -1,0 +1,14 @@
+[
+  {
+    "companyName": "Orbit Media Studios",
+    "companyUrl": "https://www.orbitmedia.com/",
+    "rating": "",
+    "address": "Orbit Media Studios\n4.9(48) · Website designer\n25+ years in business · Chicago, IL, United States\nClosed · Opens 8:30 am · +1 773-348-4581\nOn-site services",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "Failed to scrape: Blocked or empty page for https://www.orbitmedia.com/"
+  }
+]

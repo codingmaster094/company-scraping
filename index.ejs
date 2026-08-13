@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        // Tailwind CSS dark mode configuration
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="flex justify-between items-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 dark:text-white">Web Scraping Tool</h1>
+            <button id="darkModeToggle"
+                class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                <svg id="sunIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 18a6 6 0 100-12 6 6 0 000 12z">
+                    </path>
+                </svg>
+                <svg id="moonIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                    </path>
+                </svg>
+            </button>
+        </header>
+
+        <main>
+            <!-- Input Section -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-8">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <input type="url" id="urlInput"
+                        class="flex-grow p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="https://www.google.com/search?q=surat+it+company&udm=1">
+                    <button id="startScrapingBtn"
+                        class="bg-blue-600 text-white font-bold py-3 px-6 rounded-md hover:bg-blue-700 transition duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed">Start
+                        Scraping</button>
+                </div>
+            </div>
+
+            <!-- Status & Progress Section -->
+            <div id="statusContainer" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-8 hidden">
+                <div class="flex items-center gap-4 mb-4">
+                    <div id="loadingSpinner"
+                        class="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                    <p id="statusMessage" class="text-lg font-medium">Starting...</p>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4">
+                    <div id="progressBar" class="bg-blue-600 h-4 rounded-full transition-all duration-500"
+                        style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsContainer" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hidden">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
+                    <div class="flex items-center gap-2">
+                        <h2 class="text-2xl font-semibold">Results</h2>
+                        <span id="totalFound"
+                            class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full">0</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button id="exportCsvBtn" class="export-btn">Export CSV</button>
+                        <button id="exportExcelBtn" class="export-btn">Export Excel</button>
+                        <button id="exportJsonBtn" class="export-btn">Export JSON</button>
+                    </div>
+                </div>
+                <div class="flex mb-4">
+                    <input type="text" id="searchInput"
+                        class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700"
+                        placeholder="Search results...">
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th class="table-header">Company Name</th>
+                                <th class="table-header">Website</th>
+                                <th class="table-header">Email</th>
+                                <th class="table-header">Phone</th>
+                                <th class="table-header">Services</th>
+                                <th class="table-header">Tech Stack</th>
+                                <th class="table-header">Download</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody"
+                            class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            <!-- Rows will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="paginationControls" class="flex justify-between items-center mt-4">
+                    <!-- Pagination will be inserted here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/main.js"></script>
+</body>
+
+</html>

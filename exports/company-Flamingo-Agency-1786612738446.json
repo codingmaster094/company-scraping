@@ -1,0 +1,25 @@
+[
+  {
+    "companyName": "Flamingo Agency",
+    "companyUrl": "https://www.flamingoagency.com/?utm_source=gmb&utm_medium=organic",
+    "rating": "",
+    "address": "Flamingo Agency\n5.0(88) · Website designer\n10+ years in business · Chicago, IL, United States\nOpen 24 hours · +1 312-967-7044\nOn-site services·\nOnline appointments",
+    "companyEmail": "info@flamingoagency.com",
+    "companyPhone": "1000300",
+    "service": "Flamingo Agency is a web design agency creating custom WordPress websites for small businesses. View our portfolio and 150+ five-star reviews.",
+    "detectedServices": [
+      "Website Design",
+      "Website Maintenance",
+      "Digital Marketing",
+      "SEO",
+      "WordPress Development",
+      "Ecommerce Development",
+      "Web Development"
+    ],
+    "technologies": [
+      "WooCommerce",
+      "WordPress",
+      "Elementor"
+    ]
+  }
+]

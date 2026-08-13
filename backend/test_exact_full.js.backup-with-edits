@@ -1,0 +1,208 @@
+const puppeteer = require('puppeteer');
+const { exec } = require('child_process');
+
+(async () => {
+  // Strategy: Build a minimal clean search URL with only q + start params
+  // This avoids CAPTCHA while scraping EXACT Google Search results
+
+  const tests = [
+    { name: 'Page 1', url: 'https://www.google.com/search?q=surat+it+company&udm=1&num=20&hl=en&gl=in' },
+    { name: 'Page 2', url: 'https://www.google.com/search?q=surat+it+company&udm=1&num=20&hl=en&gl=in&start=20' },
+  ];
+
+  // Try to connect to an existing Chrome (started with --remote-debugging-port=9222).
+  // If available, open new tabs in that browser; otherwise launch a visible browser.
+  const http = require('http');
+  async function detectExistingBrowserWS(port = 9222, timeout = 1000) {
+    return new Promise((resolve) => {
+      const req = http.get({ hostname: '127.0.0.1', port, path: '/json/version', timeout }, (res) => {
+        let data = '';
+        res.on('data', (chunk) => data += chunk);
+        res.on('end', () => {
+          try {
+            const j = JSON.parse(data);
+            resolve(j.webSocketDebuggerUrl || null);
+          } catch (e) {
+            resolve(null);
+          }
+        });
+      });
+      req.on('error', () => resolve(null));
+      req.on('timeout', () => { req.destroy(); resolve(null); });
+    });
+  }
+
+  // Try to open a URL as a new tab in an existing Chrome started with --remote-debugging-port=9222.
+  // Returns true if successful, false otherwise.
+  async function openUrlInRemoteChrome(url, port = 9222, timeout = 1000) {
+    // Try CDP Target.createTarget first (works when connected via puppeteer.connect)
+    if (browser && typeof browser._connection === 'object' && typeof browser._connection.send === 'function') {
+      try {
+        await browser._connection.send('Target.createTarget', { url });
+        return true;
+      } catch (e) {
+        // fall through to http /json/new
+      }
+    }
+
+    return new Promise((resolve) => {
+      try {
+        const path = '/json/new?' + encodeURIComponent(url);
+        const req = http.get({ hostname: '127.0.0.1', port, path, timeout }, (res) => {
+          // Chrome returns details about the created target; treat 200 as success.
+          if (res.statusCode === 200) resolve(true);
+          else resolve(false);
+        });
+        req.on('error', () => resolve(false));
+        req.on('timeout', () => { req.destroy(); resolve(false); });
+      } catch (e) { resolve(false); }
+    });
+  }
+
+  async function connectOrLaunch() {
+    const ws = await detectExistingBrowserWS();
+    if (!ws) {
+      console.error('No Chrome instance with --remote-debugging-port=9222 detected.');
+      console.error('Please start Chrome first (close other Chrome windows), for example (PowerShell):');
+      console.error("  & 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' --remote-debugging-port=9222 --user-data-dir='C:\\chrome-debug-profile'");
+      process.exit(1);
+    }
+    try {
+      console.log('Connecting to existing browser (will open new tabs)...');
+      return await puppeteer.connect({ browserWSEndpoint: ws, defaultViewport: null });
+    } catch (e) {
+      console.error('Failed to connect to existing browser:', e.message);
+      process.exit(1);
+    }
+  }
+  const browser = await connectOrLaunch();
+  // Ensure a persistent project tab exists so the browser will have one tab for the project and other tabs for captures.
+  const PROJECT_TAB_URL = process.env.PROJECT_TAB_URL || 'about:blank';
+  let projectPage = null;
+  try {
+    const targets = await browser.targets();
+    const existing = targets.find(t => {
+      const u = t.url() || '';
+      return u === PROJECT_TAB_URL || (t.type() === 'page' && (t._targetInfo && t._targetInfo.title === 'Web Scraping Tool'));
+    });
+    if (existing) {
+      projectPage = await existing.page();
+      if (projectPage) {
+        try { await projectPage.bringToFront(); } catch (e) { /* ignore */ }
+      }
+    }
+    if (!projectPage) {
+      projectPage = await browser.newPage();
+      // Navigate to the configured project URL (about:blank by default) and set a friendly title so the tab is identifiable.
+      await projectPage.goto(PROJECT_TAB_URL, { waitUntil: 'domcontentloaded' }).catch(() => {});
+      try { await projectPage.evaluate(() => { document.title = 'Web Scraping Tool'; }); } catch (e) { /* ignore */ }
+      try { await projectPage.bringToFront(); } catch (e) { /* ignore */ }
+    }
+  } catch (e) {
+    console.warn('Failed ensuring project tab:', e.message);
+  }
+  
+  for (const test of tests) {
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1920, height: 1080 });
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
+    await page.setExtraHTTPHeaders({ 'Accept-Language': 'en-US,en;q=0.9', 'Upgrade-Insecure-Requests': '1' });
+    await page.evaluateOnNewDocument(() => {
+      delete navigator.__proto__.webdriver;
+      Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+    });
+
+    await page.goto(test.url, { waitUntil: 'networkidle2', timeout: 45000 });
+    await new Promise(r => setTimeout(r, 3000));
+
+    const bodyText = await page.evaluate(() => document.body.innerText || '');
+    const isCaptcha = bodyText.includes('unusual traffic') || bodyText.length < 500;
+
+    if (isCaptcha) {
+      console.log(`${test.name}: CAPTCHA BLOCKED — opening CAPTCHA in browser and waiting for resolution`);
+      try {
+        const capUrl = page.url();
+        // Try to open as a new tab in an existing Chrome with remote debugging enabled.
+        const openedInChrome = await openUrlInRemoteChrome(capUrl).catch(() => false);
+        if (openedInChrome) {
+          console.log('Opened CAPTCHA as a new tab in existing Chrome (remote-debugging).');
+          // Try to attach to the newly created target and wait until CAPTCHA is resolved.
+          const maxWaitMs = 5 * 60 * 1000; // 5 minutes
+          const pollInterval = 3000;
+          const deadline = Date.now() + maxWaitMs;
+          let attached = false;
+          while (Date.now() < deadline) {
+            try {
+              const targets = await browser.targets();
+              const capTarget = targets.find(t => {
+                const u = t.url() || '';
+                return u === capUrl || u.startsWith(capUrl) || u.includes('/sorry') || u.includes('google.com/search');
+              });
+              if (capTarget) {
+                const capPage = await capTarget.page();
+                if (capPage) {
+                  attached = true;
+                  await capPage.bringToFront().catch(() => {});
+                  try {
+                    const bodyText2 = await capPage.evaluate(() => document.body.innerText || '');
+                    if (!bodyText2.includes('unusual traffic') && bodyText2.length > 500) {
+                      console.log('CAPTCHA appears resolved, continuing...');
+                      break;
+                    }
+                  } catch (e) { /* ignore transient errors while page is loading */ }
+                }
+              }
+            } catch (e) {
+              /* ignore and retry */
+            }
+            await new Promise(r => setTimeout(r, pollInterval));
+          }
+          if (!attached) {
+            console.log('Could not attach to CAPTCHA tab. Please solve it manually in your browser, then press Enter here to continue.');
+            await new Promise(resolve => process.stdin.once('data', () => resolve()));
+          }
+          // After CAPTCHA resolution, bring project tab back to front (if we created/identified it earlier)
+          try { if (projectPage) await projectPage.bringToFront(); } catch (e) { /* ignore */ }
+        } else {
+          // Fallback: use Windows start which opens the default browser (may open a new tab if already running)
+          exec('start "" "' + capUrl.replace(/"/g, '\\"') + '"', (err) => {
+            if (err) console.warn('Failed to open system browser fallback:', err.message);
+          });
+          console.log('Opened CAPTCHA in system default browser (fallback). Please solve it, then press Enter to continue.');
+          await new Promise(resolve => process.stdin.once('data', () => resolve()));
+          try { if (projectPage) await projectPage.bringToFront(); } catch (e) { /* ignore */ }
+        }
+      } catch (e) {
+        console.warn('Failed to open CAPTCHA URL:', e.message);
+        console.log('Please open the following URL in your browser and solve the CAPTCHA, then press Enter to continue:\n', page.url());
+        await new Promise(resolve => process.stdin.once('data', () => resolve()));
+      }
+      await page.close();
+      continue;
+    }
+
+    const places = await page.evaluate(() => {
+      const SKIP = ['Choose what', 'Customised date', 'feedback', 'Map', 'Results'];
+      const names = [];
+      const els = document.querySelectorAll('[role="heading"], .qBF1Pd, .OSrC9, .v55F0e, .dbg0pd');
+      for (const el of els) {
+        const txt = el.textContent ? el.textContent.trim() : '';
+        if (txt.length > 2 && !SKIP.some(s => txt.includes(s)) && !names.includes(txt)) {
+          names.push(txt);
+        }
+      }
+      return names;
+    });
+
+    console.log(`\n${test.name} (${places.length} results):`);
+    places.forEach((p, i) => console.log(`  ${i + 1}. ${p}`));
+    await page.close();
+  }
+
+  // If a local browser was launched, close it. If connected to an existing browser, just disconnect
+  if (typeof browser.process === 'function' && browser.process()) {
+    await browser.close();
+  } else {
+    try { await browser.disconnect(); } catch (e) { /* ignore */ }
+  }
+})();

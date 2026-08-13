@@ -1,0 +1,20 @@
+[
+  {
+    "companyName": "1Brand Design",
+    "companyUrl": "https://1brand.design/",
+    "rating": "",
+    "address": "1Brand Design\n5.0(36) · Website designer\n15+ years in business\nClosed · Opens 8 am · +1 773-680-4999\nOnline appointments",
+    "companyEmail": "info@1brand.design",
+    "companyPhone": "7736804999",
+    "service": "Chicago web design, SEO & branding for small businesses. 15+ years of experience, fast turnaround, and a free same-day consultation.",
+    "detectedServices": [
+      "Website Design",
+      "SEO",
+      "Graphic Design",
+      "Social Media Management"
+    ],
+    "technologies": [
+      "WordPress"
+    ]
+  }
+]

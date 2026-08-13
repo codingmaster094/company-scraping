@@ -1,0 +1,34 @@
+[
+  {
+    "companyName": "10com Web Development",
+    "companyUrl": "https://www.10comwebdevelopment.com/",
+    "rating": "",
+    "address": "10com Web Development\n4.8(456) · Website designer\n20+ years in business · Chicago, IL, United States\nOpen 24 hours · +1 312-321-7496\nOn-site services·\nOnline appointments",
+    "companyEmail": "info@10comwebdevelopment.com",
+    "companyPhone": "1786584246731",
+    "service": "At 10com, we provide custom web design, SEO, and digital marketing strategies tailored to your business. Partner with our team to maximize your online growth.",
+    "detectedServices": [
+      "Social Media Management",
+      "Web Development",
+      "SEO",
+      "Website Design",
+      "Logo Design",
+      "Ecommerce Development",
+      "Graphic Design",
+      "Branding & Identity",
+      "Content Writing / Copywriting",
+      "Blog Writing",
+      "Digital Marketing",
+      "Press Release & Distribution",
+      "Video Production & Animation",
+      "Backlink Building",
+      "Tagline & Slogan Writing",
+      "Google Ads / PPC",
+      "Wix Web Design"
+    ],
+    "technologies": [
+      "WP Rocket",
+      "Wix"
+    ]
+  }
+]
