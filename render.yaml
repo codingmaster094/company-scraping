@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: scraping-app
+    runtime: node
+    plan: starter
+    buildCommand: npm install && npx puppeteer browsers install chrome
+    startCommand: node server.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PUPPETEER_HEADLESS
+        value: "true"
+      - key: PUPPETEER_CACHE_DIR
+        value: /opt/render/project/src/.cache/puppeteer

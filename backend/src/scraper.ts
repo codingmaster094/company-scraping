@@ -5,6 +5,11 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import fs from 'fs';
 import path from 'path';
 import { analyzeContent } from "./analyzer";
+import {
+  puppeteerLaunchArgs,
+  resolveChromeExecutable,
+  useHeadlessChrome,
+} from "./chromeLaunch";
 
 puppeteer.use(StealthPlugin());
 
@@ -186,60 +191,38 @@ async function launchCaptchaBrowser(): Promise<{ browser: any; page: any }> {
     }
   }
 
-  let execPath = process.env.PUPPETEER_EXECUTABLE_PATH || undefined;
-  if (!execPath) {
-    for (const p of [
-      "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-      "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-      "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-      "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-    ]) {
-      if (fs.existsSync(p)) { execPath = p; console.log(`Found browser: ${p}`); break; }
-    }
-  }
+  const execPath = resolveChromeExecutable();
+  const headless = useHeadlessChrome();
+  if (execPath) console.log(`Found browser: ${execPath}`);
+  else console.warn("No system Chrome found; Puppeteer will use its bundled Chromium if installed.");
 
   if (!fs.existsSync(CHROME_PROFILE_DIR)) fs.mkdirSync(CHROME_PROFILE_DIR, { recursive: true });
   clearStaleChromeLocks(CHROME_PROFILE_DIR);
-  console.log(`[CAPTCHA] Opening VISIBLE Chrome profile: ${CHROME_PROFILE_DIR}`);
+  console.log(
+    `[CAPTCHA] Opening Chrome (${headless ? "headless/cloud" : "visible"}) profile: ${CHROME_PROFILE_DIR}`
+  );
+
+  const launchOpts: any = {
+    headless,
+    ...(execPath ? { executablePath: execPath } : {}),
+    defaultViewport: headless ? { width: 1280, height: 900 } : null,
+    ignoreDefaultArgs: ["--enable-automation"],
+    args: puppeteerLaunchArgs(
+      headless
+        ? ["--window-size=1280,900"]
+        : ["--window-size=1280,900", "--window-position=80,40", "--start-maximized"]
+    ),
+  };
 
   let browser: any;
   try {
     browser = await puppeteer.launch({
-      headless: false,
-      executablePath: execPath,
+      ...launchOpts,
       userDataDir: CHROME_PROFILE_DIR,
-      defaultViewport: null,
-      ignoreDefaultArgs: ["--enable-automation"],
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-blink-features=AutomationControlled",
-        "--window-size=1280,900",
-        "--window-position=80,40",
-        "--start-maximized",
-        "--lang=en-US,en",
-        "--no-first-run",
-        "--no-default-browser-check",
-      ],
     });
   } catch (launchErr: any) {
     console.warn(`Profile launch failed (${launchErr?.message || launchErr}). Retrying...`);
-    browser = await puppeteer.launch({
-      headless: false,
-      executablePath: execPath,
-      defaultViewport: null,
-      ignoreDefaultArgs: ["--enable-automation"],
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-blink-features=AutomationControlled",
-        "--window-size=1280,900",
-        "--start-maximized",
-        "--lang=en-US,en",
-      ],
-    });
+    browser = await puppeteer.launch(launchOpts);
   }
 
   const page = await browser.newPage();
@@ -652,29 +635,11 @@ async function fetchHtmlWithPuppeteer(url: string): Promise<{ html: string; fina
     if (connectUrl) {
       browser = await puppeteer.connect({ browserURL: connectUrl, defaultViewport: null });
     } else {
-      let execPath = process.env.PUPPETEER_EXECUTABLE_PATH || undefined;
-      if (!execPath) {
-        for (const p of [
-          "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-          "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-          "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-        ]) {
-          if (fs.existsSync(p)) {
-            execPath = p;
-            break;
-          }
-        }
-      }
+      const execPath = resolveChromeExecutable();
       browser = await puppeteer.launch({
-        headless: process.env.PUPPETEER_HEADLESS === "false" ? false : true,
-        executablePath: execPath,
-        args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-blink-features=AutomationControlled",
-          "--disable-dev-shm-usage",
-          "--disable-gpu",
-        ],
+        headless: useHeadlessChrome() ? true : process.env.PUPPETEER_HEADLESS === "false" ? false : true,
+        ...(execPath ? { executablePath: execPath } : {}),
+        args: puppeteerLaunchArgs(),
       });
     }
 

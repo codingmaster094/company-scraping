@@ -1,4 +1,5 @@
 node_modules
+.cache
 .chrome-profile
 .google-cookies.json
 downloads

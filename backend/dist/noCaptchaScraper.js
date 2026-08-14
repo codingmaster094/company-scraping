@@ -54,7 +54,7 @@ const axios_1 = __importDefault(require("axios"));
 const cheerio = __importStar(require("cheerio"));
 const puppeteer_extra_1 = __importDefault(require("puppeteer-extra"));
 const puppeteer_extra_plugin_stealth_1 = __importDefault(require("puppeteer-extra-plugin-stealth"));
-const fs_1 = __importDefault(require("fs"));
+const chromeLaunch_1 = require("./chromeLaunch");
 puppeteer_extra_1.default.use((0, puppeteer_extra_plugin_stealth_1.default)());
 const PHONE_REGEX = /(?:\+?\d{1,3}[-.\s]?)?(?:\(?\d{2,4}\)?[-.\s]?)?\d{3,4}[-.\s]?\d{3,4}/g;
 function sleep(ms) {
@@ -207,31 +207,15 @@ function scrapeYellowPagesPlaces(query) {
         const maxPages = Math.max(1, Math.min(10, Number(process.env.YP_MAX_PAGES || 6)));
         let browser;
         try {
-            let execPath = process.env.PUPPETEER_EXECUTABLE_PATH || undefined;
-            if (!execPath) {
-                for (const p of [
-                    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-                    "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-                    "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-                ]) {
-                    if (fs_1.default.existsSync(p)) {
-                        execPath = p;
-                        break;
-                    }
-                }
-            }
-            browser = yield puppeteer_extra_1.default.launch({
-                headless: true,
-                executablePath: execPath,
-                args: [
+            const execPath = (0, chromeLaunch_1.resolveChromeExecutable)();
+            browser = yield puppeteer_extra_1.default.launch(Object.assign(Object.assign({ headless: true }, (execPath ? { executablePath: execPath } : {})), { args: [
                     "--no-sandbox",
                     "--disable-setuid-sandbox",
                     "--disable-dev-shm-usage",
                     "--disable-blink-features=AutomationControlled",
                     "--lang=en-US,en",
                     "--window-size=1280,900",
-                ],
-            });
+                ] }));
             const page = yield browser.newPage();
             yield page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
             yield page.setExtraHTTPHeaders({ "Accept-Language": "en-US,en;q=0.9" });
@@ -324,30 +308,14 @@ function scrapeYelpPlaces(query) {
         console.log(`[No-CAPTCHA] Yelp search: ${url}`);
         let browser;
         try {
-            let execPath = process.env.PUPPETEER_EXECUTABLE_PATH || undefined;
-            if (!execPath) {
-                for (const p of [
-                    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-                    "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-                    "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-                ]) {
-                    if (fs_1.default.existsSync(p)) {
-                        execPath = p;
-                        break;
-                    }
-                }
-            }
-            browser = yield puppeteer_extra_1.default.launch({
-                headless: true,
-                executablePath: execPath,
-                args: [
+            const execPath = (0, chromeLaunch_1.resolveChromeExecutable)();
+            browser = yield puppeteer_extra_1.default.launch(Object.assign(Object.assign({ headless: true }, (execPath ? { executablePath: execPath } : {})), { args: [
                     "--no-sandbox",
                     "--disable-setuid-sandbox",
                     "--disable-dev-shm-usage",
                     "--disable-blink-features=AutomationControlled",
                     "--lang=en-US,en",
-                ],
-            });
+                ] }));
             const page = yield browser.newPage();
             yield page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
             yield page.setExtraHTTPHeaders({ "Accept-Language": "en-US,en;q=0.9" });
@@ -493,32 +461,15 @@ function scrapeBingLocalPlaces(query) {
         console.log(`[No-CAPTCHA] Bing search: ${bingUrl}`);
         let browser;
         try {
-            const execPathEnv = process.env.PUPPETEER_EXECUTABLE_PATH;
-            let execPath = execPathEnv || undefined;
-            if (!execPath) {
-                for (const p of [
-                    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-                    "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-                    "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-                ]) {
-                    if (fs_1.default.existsSync(p)) {
-                        execPath = p;
-                        break;
-                    }
-                }
-            }
-            browser = yield puppeteer_extra_1.default.launch({
-                headless: true,
-                executablePath: execPath,
-                args: [
+            const execPath = (0, chromeLaunch_1.resolveChromeExecutable)();
+            browser = yield puppeteer_extra_1.default.launch(Object.assign(Object.assign({ headless: true }, (execPath ? { executablePath: execPath } : {})), { args: [
                     "--no-sandbox",
                     "--disable-setuid-sandbox",
                     "--disable-dev-shm-usage",
                     "--disable-blink-features=AutomationControlled",
                     "--window-size=1280,900",
                     "--lang=en-US,en",
-                ],
-            });
+                ] }));
             const page = yield browser.newPage();
             yield page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
             yield page.setExtraHTTPHeaders({ "Accept-Language": "en-US,en;q=0.9" });

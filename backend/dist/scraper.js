@@ -58,6 +58,7 @@ const puppeteer_extra_plugin_stealth_1 = __importDefault(require("puppeteer-extr
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const analyzer_1 = require("./analyzer");
+const chromeLaunch_1 = require("./chromeLaunch");
 puppeteer_extra_1.default.use((0, puppeteer_extra_plugin_stealth_1.default)());
 /** Persistent Chrome profile + cookie file so CAPTCHA is solved only once. */
 const CHROME_PROFILE_DIR = path_1.default.join(__dirname, "../../.chrome-profile");
@@ -240,64 +241,26 @@ function launchCaptchaBrowser() {
                 sharedPage = null;
             }
         }
-        let execPath = process.env.PUPPETEER_EXECUTABLE_PATH || undefined;
-        if (!execPath) {
-            for (const p of [
-                "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-                "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-                "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-                "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-            ]) {
-                if (fs_1.default.existsSync(p)) {
-                    execPath = p;
-                    console.log(`Found browser: ${p}`);
-                    break;
-                }
-            }
-        }
+        const execPath = (0, chromeLaunch_1.resolveChromeExecutable)();
+        const headless = (0, chromeLaunch_1.useHeadlessChrome)();
+        if (execPath)
+            console.log(`Found browser: ${execPath}`);
+        else
+            console.warn("No system Chrome found; Puppeteer will use its bundled Chromium if installed.");
         if (!fs_1.default.existsSync(CHROME_PROFILE_DIR))
             fs_1.default.mkdirSync(CHROME_PROFILE_DIR, { recursive: true });
         clearStaleChromeLocks(CHROME_PROFILE_DIR);
-        console.log(`[CAPTCHA] Opening VISIBLE Chrome profile: ${CHROME_PROFILE_DIR}`);
+        console.log(`[CAPTCHA] Opening Chrome (${headless ? "headless/cloud" : "visible"}) profile: ${CHROME_PROFILE_DIR}`);
+        const launchOpts = Object.assign(Object.assign({ headless }, (execPath ? { executablePath: execPath } : {})), { defaultViewport: headless ? { width: 1280, height: 900 } : null, ignoreDefaultArgs: ["--enable-automation"], args: (0, chromeLaunch_1.puppeteerLaunchArgs)(headless
+                ? ["--window-size=1280,900"]
+                : ["--window-size=1280,900", "--window-position=80,40", "--start-maximized"]) });
         let browser;
         try {
-            browser = yield puppeteer_extra_1.default.launch({
-                headless: false,
-                executablePath: execPath,
-                userDataDir: CHROME_PROFILE_DIR,
-                defaultViewport: null,
-                ignoreDefaultArgs: ["--enable-automation"],
-                args: [
-                    "--no-sandbox",
-                    "--disable-setuid-sandbox",
-                    "--disable-dev-shm-usage",
-                    "--disable-blink-features=AutomationControlled",
-                    "--window-size=1280,900",
-                    "--window-position=80,40",
-                    "--start-maximized",
-                    "--lang=en-US,en",
-                    "--no-first-run",
-                    "--no-default-browser-check",
-                ],
-            });
+            browser = yield puppeteer_extra_1.default.launch(Object.assign(Object.assign({}, launchOpts), { userDataDir: CHROME_PROFILE_DIR }));
         }
         catch (launchErr) {
             console.warn(`Profile launch failed (${(launchErr === null || launchErr === void 0 ? void 0 : launchErr.message) || launchErr}). Retrying...`);
-            browser = yield puppeteer_extra_1.default.launch({
-                headless: false,
-                executablePath: execPath,
-                defaultViewport: null,
-                ignoreDefaultArgs: ["--enable-automation"],
-                args: [
-                    "--no-sandbox",
-                    "--disable-setuid-sandbox",
-                    "--disable-dev-shm-usage",
-                    "--disable-blink-features=AutomationControlled",
-                    "--window-size=1280,900",
-                    "--start-maximized",
-                    "--lang=en-US,en",
-                ],
-            });
+            browser = yield puppeteer_extra_1.default.launch(launchOpts);
         }
         const page = yield browser.newPage();
         usingRemoteBrowser = false;
@@ -398,6 +361,8 @@ const SERVICE_PAGE_KEYWORDS = [
     "offer",
     "our-work",
     "portfolio",
+    "case-stud",
+    "projects",
     "about",
     "industr",
     "product",
@@ -417,8 +382,6 @@ const SERVICE_PAGE_KEYWORDS = [
     "react",
     "ecommerce",
     "e-commerce",
-    "case-stud",
-    "projects",
 ];
 const SERVICE_URL_FALLBACKS = [
     "/services",
@@ -484,8 +447,9 @@ function isServicePageUrl(rawUrl, baseOrigin) {
         // Ignore assets and page-like fragments
         if (/\.(png|jpe?g|gif|svg|css|js|webp|ico|pdf|zip|woff2?)$/.test(path))
             return false;
-        if (/\/(blog|news|tag|category|author)\b/i.test(path) && !/service|develop|wordpress|shopify/i.test(path))
+        if (/\/(blog|news|tag|category|author)\b/i.test(path) && !/service|develop|wordpress|shopify/i.test(path)) {
             return false;
+        }
         return SERVICE_PAGE_KEYWORDS.some((keyword) => path.includes(keyword));
     }
     catch (_a) {
@@ -669,30 +633,8 @@ function fetchHtmlWithPuppeteer(url) {
                 browser = yield puppeteer_extra_1.default.connect({ browserURL: connectUrl, defaultViewport: null });
             }
             else {
-                let execPath = process.env.PUPPETEER_EXECUTABLE_PATH || undefined;
-                if (!execPath) {
-                    for (const p of [
-                        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-                        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-                        "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-                    ]) {
-                        if (fs_1.default.existsSync(p)) {
-                            execPath = p;
-                            break;
-                        }
-                    }
-                }
-                browser = yield puppeteer_extra_1.default.launch({
-                    headless: process.env.PUPPETEER_HEADLESS === "false" ? false : true,
-                    executablePath: execPath,
-                    args: [
-                        "--no-sandbox",
-                        "--disable-setuid-sandbox",
-                        "--disable-blink-features=AutomationControlled",
-                        "--disable-dev-shm-usage",
-                        "--disable-gpu",
-                    ],
-                });
+                const execPath = (0, chromeLaunch_1.resolveChromeExecutable)();
+                browser = yield puppeteer_extra_1.default.launch(Object.assign(Object.assign({ headless: (0, chromeLaunch_1.useHeadlessChrome)() ? true : process.env.PUPPETEER_HEADLESS === "false" ? false : true }, (execPath ? { executablePath: execPath } : {})), { args: (0, chromeLaunch_1.puppeteerLaunchArgs)() }));
             }
             const page = yield browser.newPage();
             yield page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
@@ -786,7 +728,7 @@ function scrapeWebsite(url) {
         if (!html || isChallengeOrBlockedHtml(html)) {
             throw new Error(`Blocked or empty page for ${fullUrl}`);
         }
-        // --- Step 3: Independent deep crawl of relevant pages (axios only — no extra CAPTCHA) ---
+        // --- Step 3: Independent deep crawl of relevant service/tech pages (not the whole site) ---
         const $ = cheerio.load(html);
         let servicePageHtmls = [];
         try {

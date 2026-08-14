@@ -2191,5 +2191,535 @@
       "SEO"
     ],
     "technologies": []
+  },
+  {
+    "companyName": "Conrad Creative",
+    "companyUrl": "https://www.conradcreative.agency/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=15813464487663903260",
+    "rating": "",
+    "address": "Conrad Creative\n5.0(5) · Website designer\nChicago, IL, United States\nOpen 24 hours · +1 312-489-8777\n\t\nProvides: Web Design and Development",
+    "companyEmail": "kelsie@conradcreative.agency",
+    "companyPhone": "+13124898777",
+    "service": "Conrad Creative is your expert partner in AI-ready web design and results-driven social media strategy. We craft modern digital experiences that scale your brand.",
+    "detectedServices": [
+      "SEO",
+      "Website Design",
+      "Social Media Management"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "Holistic Web Studios",
+    "companyUrl": "",
+    "rating": "",
+    "address": "Holistic Web Studios\n1.0(5) · Design agency\n5+ years in business · Chicago, IL, United States\nClosed · Opens 9 am · +1 862-204-4701",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Paragraphs, LLC",
+    "companyUrl": "https://www.paragraphs.com/",
+    "rating": "",
+    "address": "Paragraphs, LLC\n5.0(3) · Graphic designer\n40+ years in business · Chicago, IL, United States\nClosed · Opens 9 am\n\t\nProvides: Web Design",
+    "companyEmail": "robin@paragraphs.com",
+    "companyPhone": "1786073480362",
+    "service": "Paragraphs - Official Website",
+    "detectedServices": [
+      "No Services"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "Excal Design",
+    "companyUrl": "https://excal.design/",
+    "rating": "",
+    "address": "Excal Design\n4.5(2) · Marketing agency\n5+ years in business · Chicago, IL, United States\nClosed · Opens 9 am · +1 312-943-6813\n\t\nProvides: Seo And Web Design",
+    "companyEmail": "support@example.com",
+    "companyPhone": "3129436813",
+    "service": "Excal Design Inc. is a Chicago based, cross medium, branding design and marketing agency. Our services include strategic planning, digital media and brand consulting.",
+    "detectedServices": [
+      "No Services"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "Envisionit",
+    "companyUrl": "https://envisionitagency.com/",
+    "rating": "",
+    "address": "Envisionit\n5.0(4) · Website designer\n20+ years in business · Chicago, IL, United States\nClosed · Opens 9 am · +1 312-236-2000\n\t\nProvides: Web Development",
+    "companyEmail": "newbusiness@envisionitagency.com",
+    "companyPhone": "3122362000",
+    "service": "Envisionit is an award-winning digital marketing agency that specializes in strategy, creative, media and technology. Get to know ENV today.",
+    "detectedServices": [
+      "SEO",
+      "Press Release & Distribution",
+      "Web Development",
+      "Social Media Management",
+      "Digital Marketing",
+      "Branding & Identity",
+      "Google Ads / PPC"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "Praella - eCommerce Agency",
+    "companyUrl": "https://praella.com/",
+    "rating": "",
+    "address": "Praella - eCommerce Agency\n5.0(11) · Website designer\nChicago, IL, United States\nClosed · Opens 9 am · +1 312-761-3218\n\t\nProvides: Web Design",
+    "companyEmail": "",
+    "companyPhone": "1021544",
+    "service": "Unlock ecommerce success with Praella, your award-winning Shopify Plus Agency and Certified Shopify Plus Partner. Specializing in UX, CRO, integration, migration, and custom development, we empower Shopify merchants to scale effortlessly.",
+    "detectedServices": [
+      "Ecommerce Development"
+    ],
+    "technologies": [
+      "Shopify Plus",
+      "WooCommerce",
+      "BigCommerce",
+      "Magento"
+    ]
+  },
+  {
+    "companyName": "AttorneySync",
+    "companyUrl": "https://www.attorneysync.com/?utm_source=google&utm_medium=organic&utm_campaign=GMB&utm_content=website",
+    "rating": "",
+    "address": "AttorneySync\n4.9(50) · Website designer\n15+ years in business · Chicago, IL, United States\nClosed · Opens 9 am · +1 773-828-8878\n\t\nProvides: Web Design & Development",
+    "companyEmail": "",
+    "companyPhone": "7738288878",
+    "service": "Law Firm Marketing Expertise Enhanced by Technology.",
+    "detectedServices": [
+      "SEO",
+      "Website Design",
+      "Google Ads / PPC",
+      "Social Media Management"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "Xperts Creation",
+    "companyUrl": "http://www.xpertscreation.com/",
+    "rating": "",
+    "address": "Xperts Creation\n1.0(3) · Website designer\n15+ years in business · Chicago, IL, United States\nClosed · Opens 9 am · +1 872-222-9360",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "Failed to scrape: Could not fetch website http://www.xpertscreation.com/"
+  },
+  {
+    "companyName": "Eclectik Design",
+    "companyUrl": "https://www.eclectik.com/",
+    "rating": "",
+    "address": "Eclectik Design\n5.0(15) · Website designer\n20+ years in business · Chicago, IL, United States\nClosed · Opens 8 am · +1 312-690-3181\n\t\nProvides: Branding And Web Design",
+    "companyEmail": "info@eclectik.com",
+    "companyPhone": "13126903181",
+    "service": "In a world with a very short attention span, we help you create communications that make people pause, take notice, and build trust. This leads to deeper, meaningful connections for your life and business. Eclectik Design Services include both Graphic Design and Holiday & Greeting Cards.",
+    "detectedServices": [
+      "Graphic Design",
+      "Social Media Management"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "Doodle N Dash",
+    "companyUrl": "https://www.doodlendash.com/",
+    "rating": "",
+    "address": "Doodle N Dash\n3.0(2) · Design agency\nClosed · Opens 9 am · +1 312-885-4101\n\t\n\"Definitely choose them if you need a website!\"",
+    "companyEmail": "info@doodlendash.com",
+    "companyPhone": "7734518470",
+    "service": "Doodle N Dash - Creative Agency specializing in Logo Design, Web Development, Mobile Apps & Social Media Marketing.",
+    "detectedServices": [
+      "Web Development",
+      "Social Media Management",
+      "SEO"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "DesignRush",
+    "companyUrl": "https://www.designrush.com/",
+    "rating": "",
+    "address": "DesignRush\n4.8(102) · Internet marketing service\n7+ years in business · Miami, FL, United States\nClosed · Opens 7 am · +1 305-370-1017\n\t\nProvides: Web Design Agency Listings",
+    "companyEmail": "info@designrush.com",
+    "companyPhone": "",
+    "service": "B2B Media platform driving brand discovery & growth with trends, agency rankings, marketplace & best designs.",
+    "detectedServices": [
+      "Ecommerce Development",
+      "Website Design",
+      "Digital Marketing",
+      "Mobile App Development",
+      "Web Development",
+      "SEO",
+      "UI/UX Design",
+      "Google Ads / PPC",
+      "Logo Design",
+      "Graphic Design",
+      "Video Production & Animation",
+      "WordPress Development",
+      "Magento Development",
+      "Shopify Development",
+      "Social Media Management"
+    ],
+    "technologies": [
+      "WooCommerce",
+      "WordPress",
+      "Squarespace",
+      "Shopify",
+      "Magento",
+      "Webflow",
+      "Drupal"
+    ]
+  },
+  {
+    "companyName": "Web Design Agency Chicago - WebWolfs",
+    "companyUrl": "https://dewartp.live/",
+    "rating": "",
+    "address": "Web Design Agency Chicago - WebWolfs\nNo reviews · Website designer\nChicago, IL, United States\nTemporarily closed · +1 605-291-1587",
+    "companyEmail": "",
+    "companyPhone": "0448512",
+    "service": "DewaRTP adalah situs RTP live jujur berdasarkan data dari Pragmatic, PG Soft, Habanero, Nolimit City, dan provider lain. Multi-provider Indonesia, bukan tipa-tipu pola.",
+    "detectedServices": [
+      "No Services"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "Hello Mainland LLC",
+    "companyUrl": "https://hellomainland.com/",
+    "rating": "",
+    "address": "Hello Mainland LLC\n4.4(7) · Website designer\n5+ years in business · Chicago, IL, United States\n+1 312-526-3996\n\t\nProvides: Web Design & Development",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "Partner with an award-winning Franchise Marketing & PR Agency that supports your growing brand and your franchisees. Mainland Agency provides customers with a complete range of marketing services.",
+    "detectedServices": [
+      "Digital Marketing"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "Hyperlocal",
+    "companyUrl": "http://www.hyperlocalplatform.com/",
+    "rating": "",
+    "address": "Hyperlocal\n4.7(14) · Website designer\n7+ years in business · Chicago, IL, United States\nClosed · Opens 9 am · +1 312-313-4020\n\t\nProvides: Web Design & Development",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "Failed to scrape: Could not fetch website http://www.hyperlocalplatform.com/"
+  },
+  {
+    "companyName": "Wpromote",
+    "companyUrl": "http://www.wpromote.com/chicago/",
+    "rating": "",
+    "address": "Wpromote\n4.5(21) · Website designer\n7+ years in business · Chicago, IL, United States\nClosed · Opens 8 am · +1 312-690-7112\n\t\nProvides: Web Development",
+    "companyEmail": "",
+    "companyPhone": "2022300",
+    "service": "Transform your business with Wpromote's digital marketing agency in Chicago, specializing in Paid & Earned Media. Our agency drives growth and results -- contact us today!",
+    "detectedServices": [
+      "Ecommerce Development",
+      "Digital Marketing",
+      "SEO"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "Dynamic Global Marketing",
+    "companyUrl": "https://dynamicglobalmarketing.com/locations/chicago-il/",
+    "rating": "",
+    "address": "Dynamic Global Marketing\n4.5(8) · Website designer\n10+ years in business · Chicago, IL, United States\nClosed · Opens 9 am · +1 773-915-0524",
+    "companyEmail": "info@dynamicglobalmarketing.com",
+    "companyPhone": "7739150524",
+    "service": "Chicago's #1 SEO company. 20+ years, 50+ team members, proven results. Local SEO, technical SEO, content strategy, link building, web design, PPC, and more.",
+    "detectedServices": [
+      "SEO",
+      "Ecommerce Development",
+      "Website Design",
+      "Google Ads / PPC",
+      "Social Media Management",
+      "Blog Writing",
+      "Digital Marketing",
+      "Backlink Building",
+      "Content Writing / Copywriting",
+      "Press Release & Distribution"
+    ],
+    "technologies": [
+      "WordPress",
+      "Squarespace",
+      "Shopify",
+      "Webflow",
+      "HubSpot",
+      "Wix"
+    ]
+  },
+  {
+    "companyName": "Half Past Midnight (HPM) Consulting",
+    "companyUrl": "https://hpm-consulting.com/",
+    "rating": "",
+    "address": "Half Past Midnight (HPM) Consulting\n5.0(5) · Website designer\n5+ years in business · Chicago, IL, United States\nClosed · Opens 9 am · +1 224-707-8502\nOn-site services·\nOnline appointments",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "Page not found - Official Website",
+    "detectedServices": [
+      "No Services"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "JLV Web Development",
+    "companyUrl": "https://jlvwebdevelopment.com/",
+    "rating": "",
+    "address": "JLV Web Development\nNo reviews · Website designer\nClosed · Opens 9 am",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "403 - Official Website",
+    "detectedServices": [
+      "No Services"
+    ],
+    "technologies": []
+  },
+  {
+    "companyName": "Web design & Tech Services by NL",
+    "companyUrl": "",
+    "rating": "",
+    "address": "Web design & Tech Services by NL\nNo reviews · Website designer\n7+ years in business\nOpen 24 hours · +1 630-870-7742",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Skip to main content",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "AI Mode",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "All",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "News",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Images",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Maps",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Forums",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Places",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Short videos",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Web",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Flights",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Finance",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Online appointments",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Open now",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Top rated",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Any time",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "All results",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "See all results",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
+  },
+  {
+    "companyName": "Adajan, Surat, Gujarat - From your IP address",
+    "companyUrl": "",
+    "rating": "",
+    "address": "",
+    "companyEmail": "",
+    "companyPhone": "",
+    "service": "",
+    "detectedServices": [],
+    "technologies": [],
+    "error": "No company website found — listing data only"
   }
 ]

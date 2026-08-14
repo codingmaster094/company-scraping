@@ -1,0 +1,8 @@
+node_modules
+.cache
+.chrome-profile
+.git
+exports
+downloads
+*.xlsx
+*.csv

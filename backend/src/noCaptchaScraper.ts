@@ -2,7 +2,7 @@
 import * as cheerio from "cheerio";
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import fs from "fs";
+import { resolveChromeExecutable } from "./chromeLaunch";
 
 puppeteer.use(StealthPlugin());
 
@@ -186,23 +186,11 @@ export async function scrapeYellowPagesPlaces(
 
   let browser: any;
   try {
-    let execPath = process.env.PUPPETEER_EXECUTABLE_PATH || undefined;
-    if (!execPath) {
-      for (const p of [
-        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-        "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-      ]) {
-        if (fs.existsSync(p)) {
-          execPath = p;
-          break;
-        }
-      }
-    }
+    const execPath = resolveChromeExecutable();
 
     browser = await puppeteer.launch({
       headless: true,
-      executablePath: execPath,
+      ...(execPath ? { executablePath: execPath } : {}),
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
@@ -345,23 +333,11 @@ export async function scrapeYelpPlaces(query: string): Promise<LocalPlaceResult[
 
   let browser: any;
   try {
-    let execPath = process.env.PUPPETEER_EXECUTABLE_PATH || undefined;
-    if (!execPath) {
-      for (const p of [
-        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-        "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-      ]) {
-        if (fs.existsSync(p)) {
-          execPath = p;
-          break;
-        }
-      }
-    }
+    const execPath = resolveChromeExecutable();
 
     browser = await puppeteer.launch({
       headless: true,
-      executablePath: execPath,
+      ...(execPath ? { executablePath: execPath } : {}),
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
@@ -537,24 +513,11 @@ export async function scrapeBingLocalPlaces(
 
   let browser: any;
   try {
-    const execPathEnv = process.env.PUPPETEER_EXECUTABLE_PATH;
-    let execPath = execPathEnv || undefined;
-    if (!execPath) {
-      for (const p of [
-        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-        "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-        "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-      ]) {
-        if (fs.existsSync(p)) {
-          execPath = p;
-          break;
-        }
-      }
-    }
+    const execPath = resolveChromeExecutable();
 
     browser = await puppeteer.launch({
       headless: true,
-      executablePath: execPath,
+      ...(execPath ? { executablePath: execPath } : {}),
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
